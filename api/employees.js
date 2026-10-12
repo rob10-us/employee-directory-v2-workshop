@@ -1,5 +1,10 @@
 import express from "express";
-import { getEmployee, getEmployees, getRandomEmployee } from "#db/employees";
+import {
+  getEmployee,
+  getEmployees,
+  getRandomEmployee,
+  addEmployee,
+} from "#db/employees";
 
 const router = express.Router();
 export default router;
@@ -7,6 +12,21 @@ export default router;
 router.get("/", (req, res) => {
   const employees = getEmployees();
   res.send(employees);
+});
+
+router.post("/", (req, res) => {
+  if (!req.body)
+    return res
+      .status(400)
+      .send("No request body given. Request body is required");
+
+  const { name } = req.body;
+
+  if (!name) {
+    return res.status(400).send("No name given. Name is required.");
+  }
+  const employee = addEmployee(name);
+  res.status(201).send(employee);
 });
 
 router.get("/random", (req, res) => {

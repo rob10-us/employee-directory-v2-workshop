@@ -6,6 +6,8 @@ export default app;
 
 import employeesRouter from "#api/employees";
 
+app.use(express.json());
+
 app.get("/", (req, res) => {
   res.send("Hello employees!");
 });

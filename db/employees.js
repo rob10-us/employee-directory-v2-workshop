@@ -26,3 +26,9 @@ export function getRandomEmployee() {
   const randomIndex = Math.floor(Math.random() * employees.length);
   return employees[randomIndex];
 }
+
+export function addEmployee(name) {
+  const employee = { id: employees.length + 1, name };
+  employees.push(employee);
+  return employee;
+}
